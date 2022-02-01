@@ -1,0 +1,13 @@
+*~
+.idea
+cmake-build-debug
+.vscode
+README.html
+venv
+build
+tags
+compile_commands.json
+*
+
+# clangd directory
+.clangd

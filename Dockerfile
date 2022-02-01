@@ -3,19 +3,10 @@ LABEL Description="Build environment for cppThreadPool"
 
 ENV HOME /root
 SHELL ["/bin/bash", "-c"]
+COPY ./installdeps.sh /installdeps.sh
 
-# Copy the current folder which contains C++ source code to the Docker image under /usr/src
-COPY . /usr/src
-
-# Specify the working directory
-WORKDIR /usr/src
-
-# Install packages in docker container
-RUN apt-get update && apt-get -y --no-install-recommends install \
-	build-essential \
-	clang \
-	cmake \
-	gdb \
-	wget
-
-
+# install all dependencies in docker image
+RUN chmod +x /installdeps.sh && \
+    /bin/bash -c "/installdeps.sh" && \
+    apt-get clean && \
+    apt-get autoclean
